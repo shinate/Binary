@@ -1,0 +1,13 @@
+{
+    "name": "shinate/binary",
+    "description": "Binary stream parser & builder",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "shinate",
+            "email": "shine.wangrs@gmail.com"
+        }
+    ],
+    "require": {}
+}
