@@ -1,5 +1,5 @@
 {
-  "name": "shinate/binary",
+  "name": "codante/binary",
   "description": "Binary stream parser & builder",
   "type": "library",
   "license": "MIT",
