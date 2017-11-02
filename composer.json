@@ -1,20 +1,20 @@
 {
-    "name": "shinate/binary",
-    "description": "Binary stream parser & builder",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "shinate",
-            "email": "shine.wangrs@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.6.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Codante\\Binary\\": "/"
-        }
+  "name": "shinate/binary",
+  "description": "Binary stream parser & builder",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "shinate",
+      "email": "shine.wangrs@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=5.6.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Codante\\Binary\\": "/"
+    }
+  }
 }
