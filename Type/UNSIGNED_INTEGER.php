@@ -8,15 +8,14 @@
 
 namespace Codante\Binary\Type;
 
-
 class UNSIGNED_INTEGER extends Prototype
 {
     protected $LENGTH = 4;
 
-    protected $pack_format = 'I';
+    protected $PACK_FORMAT = 'I';
 
     public function unpack($raw) {
-        return array_values(unpack($this->pack_format, $raw))[0];
+        return array_values(unpack($this->PACK_FORMAT, $raw))[0];
     }
 
     public function hex($raw) {

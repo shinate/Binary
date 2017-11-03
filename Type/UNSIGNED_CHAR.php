@@ -13,5 +13,13 @@ class UNSIGNED_CHAR extends Prototype
 {
     protected $LENGTH = 4;
 
-    protected $pack_format = 'C*';
+    protected $PACK_FORMAT = 'C*';
+
+    public function unpack($raw) {
+        return array_values(unpack($this->PACK_FORMAT, $raw));
+    }
+
+    public function hex($raw) {
+        return call_user_func_array('vsprintf', [str_repeat('%02X', $this->LENGTH), $this->unpack($raw)]);
+    }
 }

@@ -12,31 +12,31 @@ use Codante\Binary\Binary;
 use Codante\Binary\Parser;
 use ReflectionClass;
 
-class Prototype
+abstract class Prototype
 {
 
     protected $LENGTH;
 
-    protected $pack_format = null;
+    protected $PACK_FORMAT = null;
 
-    protected $pack_filter = 0;
+    protected $FILTER = 0;
 
-    protected $wrapper = null;
+    protected $WRAP = null;
 
     public function __construct(int $length = null, int $pack_filter = 0, $wrapper = null) {
         if ($length > -1) {
             $this->LENGTH = $length;
         }
-        $this->pack_filter = $pack_filter;
+        $this->FILTER = $pack_filter;
         if (!is_null($wrapper)) {
-            $this->wrapper = $wrapper;
+            $this->WRAP = $wrapper;
         }
     }
 
     public function parse(Parser &$parser) {
         $raw = $parser->stream()->read($this->LENGTH);
 
-        switch ($this->pack_filter) {
+        switch ($this->FILTER) {
             case Binary::RAW_FILTER_PACK:
                 method_exists($this, 'unpack') && $raw = $this->unpack($raw);
                 break;
@@ -45,11 +45,11 @@ class Prototype
                 break;
         }
 
-        if (!is_null($this->wrapper)) {
-            if (is_callable($this->wrapper)) {
-                $raw = call_user_func($this->wrapper, $raw);
-            } elseif (class_exists($this->wrapper)) {
-                $raw = (new ReflectionClass($this->wrapper))->newInstance($raw);
+        if (!is_null($this->WRAP)) {
+            if (is_callable($this->WRAP)) {
+                $raw = call_user_func($this->WRAP, $raw);
+            } elseif (class_exists($this->WRAP)) {
+                $raw = (new ReflectionClass($this->WRAP))->newInstance($raw);
             }
         }
 

@@ -8,9 +8,6 @@
 
 namespace Codante\Binary;
 
-
-use Codante\Binary\Type\COLLECTION;
-
 class Parser
 {
     private $CONST = [];
@@ -19,9 +16,9 @@ class Parser
 
     private $STREAM;
 
-    public function __construct($construction = [], $stream = null) {
+    public function __construct($construction = [], Stream $stream = null) {
         $this->CONST = $construction;
-        if ($stream && $stream instanceof Stream) {
+        if ($stream) {
             $this->parse($stream);
         }
     }
@@ -36,22 +33,23 @@ class Parser
         return $this->DATA;
     }
 
-    public function field($field) {
-
-        if (is_array($field)) {
-            $length = 1;
-            if (isset($field[0]) && is_array($field[0]) && isset($field[1]) && $field[1] > -1) {
-                $length = $field[1];
-                $field = $field[0];
-            }
-            $field = Binary::COLLECTION($field, $length);
-        }
-
-        return $field->parse($this);
-    }
-
     public function stream() {
         return $this->STREAM;
+    }
+
+    public function field($FTI) {
+
+        if (is_array($FTI)) {
+            $length = 1;
+            $member = $FTI;
+            if (isset($FTI[1]) && $FTI[1] > -1) {
+                $member = $FTI[0];
+                $length = $FTI[1];
+            }
+            $FTI = Binary::COLLECTION($member, $length);
+        }
+
+        return $FTI->parse($this);
     }
 
     private function is_assoc(array $arr) {
