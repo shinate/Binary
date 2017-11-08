@@ -9,11 +9,11 @@
 namespace Codante\Binary\Type;
 
 
-class UNSIGNED_CHAR extends Prototype implements MethodsInterface
+class SIGNED_CHAR extends Prototype implements MethodsInterface
 {
     use CharTrait;
 
     protected $LENGTH = 1;
 
-    protected $PACK_FORMAT = 'C*';
+    protected $PACK_FORMAT = 'c*';
 }

@@ -19,17 +19,29 @@ class Binary
 
     const RAW_FILTER_HEX = 2;
 
-//
-//    public static function __callStatic($name, $arguments) {
-//        // TODO: Implement __callStatic() method.
-//        return (new ReflectionClass(__NAMESPACE__ . '\\Type\\' . $name))->newInstanceArgs($arguments);
-//    }
+    //
+    //    public static function __callStatic($name, $arguments) {
+    //        // TODO: Implement __callStatic() method.
+    //        return (new ReflectionClass(__NAMESPACE__ . '\\Type\\' . $name))->newInstanceArgs($arguments);
+    //    }
 
     private static function TypeInstantiator($name, $arguments) {
         return (new ReflectionClass(__NAMESPACE__ . '\\Type\\' . $name))->newInstanceArgs($arguments);
     }
 
+    public static function SIGNED_SHORT() {
+        return self::TypeInstantiator(__FUNCTION__, func_get_args());
+    }
+
+    public static function UNSIGNED_SHORT() {
+        return self::TypeInstantiator(__FUNCTION__, func_get_args());
+    }
+
     public static function UNSIGNED_INTEGER() {
+        return self::TypeInstantiator(__FUNCTION__, func_get_args());
+    }
+
+    public static function SIGNED_CHAR() {
         return self::TypeInstantiator(__FUNCTION__, func_get_args());
     }
 
@@ -43,6 +55,10 @@ class Binary
 
     public static function Parser($construction = [], Stream $stream = null) {
         return new Parser($construction, $stream);
+    }
+
+    public static function Builder($construction = [], $data = null) {
+        return new Builder($construction, $data);
     }
 
     public static function Stream($bin = '') {

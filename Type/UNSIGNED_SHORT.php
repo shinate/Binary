@@ -8,11 +8,11 @@
 
 namespace Codante\Binary\Type;
 
-class SIGNED_INTEGER extends Prototype
+class UNSIGNED_SHORT extends Prototype implements MethodsInterface
 {
     use NumbicTrait;
 
-    protected $LENGTH = 4;
+    protected $LENGTH = 2;
 
-    protected $PACK_FORMAT = 'i';
+    protected $PACK_FORMAT = 'S';
 }

@@ -9,6 +9,7 @@
 namespace Codante\Binary\Type;
 
 use Codante\Binary\Binary;
+use Codante\Binary\Builder;
 use Codante\Binary\Parser;
 use ReflectionClass;
 
@@ -22,6 +23,8 @@ abstract class Prototype
     protected $FILTER = 0;
 
     protected $WRAP = null;
+
+    public $OFFSET;
 
     public function __construct(int $length = null, int $pack_filter = 0, $wrapper = null) {
         if ($length > -1) {
@@ -41,7 +44,7 @@ abstract class Prototype
                 method_exists($this, 'unpack') && $raw = $this->unpack($raw);
                 break;
             case Binary::RAW_FILTER_HEX:
-                method_exists($this, 'hex') && $raw = $this->hex($raw);
+                method_exists($this, 'dechex') && $raw = $this->dechex($raw);
                 break;
         }
 
@@ -54,5 +57,27 @@ abstract class Prototype
         }
 
         return $raw;
+    }
+
+    public function build(Builder &$builder, &$data) {
+        $raw = $data;
+        switch ($this->FILTER) {
+            case Binary::RAW_FILTER_PACK:
+                method_exists($this, 'pack') && $raw = $this->pack($data);
+                break;
+            case Binary::RAW_FILTER_HEX:
+                method_exists($this, 'hexdec') && $raw = $this->hexdec($data);
+                break;
+        }
+        $data = $raw;
+        $builder->stream()->write($raw);
+    }
+
+    public function length() {
+        return $this->LENGTH;
+    }
+
+    public function byteLength() {
+        return $this->LENGTH;
     }
 }

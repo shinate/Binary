@@ -8,17 +8,11 @@
 
 namespace Codante\Binary\Type;
 
-class UNSIGNED_INTEGER extends Prototype
+class UNSIGNED_INTEGER extends Prototype implements MethodsInterface
 {
+    use NumbicTrait;
+
     protected $LENGTH = 4;
 
     protected $PACK_FORMAT = 'I';
-
-    public function unpack($raw) {
-        return array_values(unpack($this->PACK_FORMAT, $raw))[0];
-    }
-
-    public function hex($raw) {
-        return call_user_func_array('vsprintf', ['%08X', $this->unpack($raw)]);
-    }
 }

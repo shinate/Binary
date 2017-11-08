@@ -25,8 +25,17 @@ class Stream
         }
     }
 
+    public function __toString() {
+        // TODO: Implement __toString() method.
+        return $this->all();
+    }
+
     private function isBinary($str) {
         return preg_match('/[^\x20-\x7E\t\r\n]/', $str) > 0;
+    }
+
+    public function all() {
+        return $this->BINARY_STRING;
     }
 
     public function seek($point) {
@@ -47,5 +56,19 @@ class Stream
 
     public function iread($start = 0, $end = 0) {
         return substr($this->BINARY_STRING, $start, $end - $start);
+    }
+
+    public function byteLength() {
+        return $this->LENGTH;
+    }
+
+    public function write($str, $len = -1) {
+        if ($len > -1) {
+            $str = substr($str, 0, $len);
+        }
+        $len = strlen($str);
+        $this->BINARY_STRING .= $str;
+        $this->LENGTH += $len;
+        $this->seek($this->POINTER + $len);
     }
 }

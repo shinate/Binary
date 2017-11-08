@@ -10,6 +10,8 @@ namespace Codante\Binary;
 
 class Parser
 {
+    use ConstructionConverter;
+
     private $CONST = [];
 
     private $DATA = [];
@@ -18,9 +20,14 @@ class Parser
 
     public function __construct($construction = [], Stream $stream = null) {
         $this->CONST = $construction;
+        $this->construction_convert_recursive($this->CONST);
         if ($stream) {
             $this->parse($stream);
         }
+    }
+
+    public function byteLength() {
+        return $this->CONST->byteLength();
     }
 
     public function parse(Stream $stream) {
@@ -37,19 +44,8 @@ class Parser
         return $this->STREAM;
     }
 
-    public function field($FTI) {
-
-        if (is_array($FTI)) {
-            $length = 1;
-            $member = $FTI;
-            if (isset($FTI[1]) && $FTI[1] > -1) {
-                $member = $FTI[0];
-                $length = $FTI[1];
-            }
-            $FTI = Binary::COLLECTION($member, $length);
-        }
-
-        return $FTI->parse($this);
+    public function field(&$field) {
+        return $field->parse($this);
     }
 
     private function is_assoc(array $arr) {
