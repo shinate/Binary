@@ -19,12 +19,6 @@ class Binary
 
     const RAW_FILTER_HEX = 2;
 
-    //
-    //    public static function __callStatic($name, $arguments) {
-    //        // TODO: Implement __callStatic() method.
-    //        return (new ReflectionClass(__NAMESPACE__ . '\\Type\\' . $name))->newInstanceArgs($arguments);
-    //    }
-
     private static function TypeInstantiator($name, $arguments) {
         return (new ReflectionClass(__NAMESPACE__ . '\\Type\\' . $name))->newInstanceArgs($arguments);
     }
