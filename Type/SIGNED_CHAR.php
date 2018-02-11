@@ -8,10 +8,12 @@
 
 namespace Codante\Binary\Type;
 
+use Codante\Binary\Processor\CHAR;
+use Codante\Binary\Processor\ProcessorInterface;
 
-class SIGNED_CHAR extends Prototype implements MethodsInterface
+class SIGNED_CHAR extends TypePrototype implements ProcessorInterface
 {
-    use CharTrait;
+    use CHAR;
 
     protected $LENGTH = 1;
 

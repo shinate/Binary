@@ -6,11 +6,16 @@
  * Time: 下午4:29
  */
 
-namespace Codante\Binary\Type;
+namespace Codante\Binary\Processor;
 
 
-interface MethodsInterface
+interface ProcessorInterface
 {
+    /**
+     * @param $data
+     *
+     * @return mixed
+     */
     public function pack($data);
 
     public function unpack($raw);

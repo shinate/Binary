@@ -11,7 +11,7 @@ namespace Codante\Binary;
 
 trait ConstructionConverter
 {
-    private function construction_convert_recursive(& $field) {
+    private function construction_convert_recursive(&$field) {
         static $_L;
         if (!isset($_L)) {
             $_L = 0;

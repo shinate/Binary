@@ -13,7 +13,7 @@ use Codante\Binary\Builder;
 use Codante\Binary\Parser;
 use ReflectionClass;
 
-abstract class Prototype
+abstract class TypePrototype
 {
 
     protected $LENGTH;
@@ -26,11 +26,31 @@ abstract class Prototype
 
     public $OFFSET;
 
-    public function __construct(int $length = null, int $pack_filter = 0, $wrapper = null) {
+    public function __construct(... $args) {
+
+        $length = null;
+        $processor_type = Binary::RAW_FILTER_NONE;
+        $wrapper = null;
+
+        if ($args && !is_int($args[count($args) - 1])) {
+            $wrapper = array_pop($args);
+        }
+
+        if ($args) {
+            foreach ($args as $v) {
+                if ($v > -1) {
+                    $length = $v;
+                } elseif ($v < Binary::RAW_FILTER_NONE) {
+                    $processor_type = $v;
+                }
+            }
+        }
+
         if ($length > -1) {
             $this->LENGTH = $length;
         }
-        $this->FILTER = $pack_filter;
+
+        $this->FILTER = $processor_type;
         if (!is_null($wrapper)) {
             $this->WRAP = $wrapper;
         }

@@ -8,44 +8,21 @@
 
 namespace Codante\Binary;
 
-use \ReflectionClass;
+use Codante\Binary\Type\TypeTrait;
 
+/**
+ * Class Binary
+ * @package Codante\Binary
+ */
 class Binary
 {
+    use TypeTrait;
 
-    const RAW_FILTER_NONE = 0;
+    const RAW_FILTER_NONE = -1;
 
-    const RAW_FILTER_PACK = 1;
+    const RAW_FILTER_PACK = -2;
 
-    const RAW_FILTER_HEX = 2;
-
-    private static function TypeInstantiator($name, $arguments) {
-        return (new ReflectionClass(__NAMESPACE__ . '\\Type\\' . $name))->newInstanceArgs($arguments);
-    }
-
-    public static function SIGNED_SHORT() {
-        return self::TypeInstantiator(__FUNCTION__, func_get_args());
-    }
-
-    public static function UNSIGNED_SHORT() {
-        return self::TypeInstantiator(__FUNCTION__, func_get_args());
-    }
-
-    public static function UNSIGNED_INTEGER() {
-        return self::TypeInstantiator(__FUNCTION__, func_get_args());
-    }
-
-    public static function SIGNED_CHAR() {
-        return self::TypeInstantiator(__FUNCTION__, func_get_args());
-    }
-
-    public static function UNSIGNED_CHAR() {
-        return self::TypeInstantiator(__FUNCTION__, func_get_args());
-    }
-
-    public static function COLLECTION() {
-        return self::TypeInstantiator(__FUNCTION__, func_get_args());
-    }
+    const RAW_FILTER_HEX = -3;
 
     public static function Parser($construction = [], Stream $stream = null) {
         return new Parser($construction, $stream);

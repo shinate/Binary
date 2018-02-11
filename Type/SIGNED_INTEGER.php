@@ -8,9 +8,12 @@
 
 namespace Codante\Binary\Type;
 
-class SIGNED_INTEGER extends Prototype
+use Codante\Binary\Processor\NUMBIC;
+use Codante\Binary\Processor\ProcessorInterface;
+
+class SIGNED_INTEGER extends TypePrototype implements ProcessorInterface
 {
-    use NumbicTrait;
+    use NUMBIC;
 
     protected $LENGTH = 4;
 

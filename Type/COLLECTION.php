@@ -8,11 +8,10 @@
 
 namespace Codante\Binary\Type;
 
-
 use Codante\Binary\Builder;
 use Codante\Binary\Parser;
 
-class COLLECTION extends Prototype
+class COLLECTION extends TypePrototype
 {
     protected $LENGTH = 1;
 

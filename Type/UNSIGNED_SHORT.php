@@ -8,9 +8,12 @@
 
 namespace Codante\Binary\Type;
 
-class UNSIGNED_SHORT extends Prototype implements MethodsInterface
+use Codante\Binary\Processor\NUMBIC;
+use Codante\Binary\Processor\ProcessorInterface;
+
+class UNSIGNED_SHORT extends TypePrototype implements ProcessorInterface
 {
-    use NumbicTrait;
+    use NUMBIC;
 
     protected $LENGTH = 2;
 
